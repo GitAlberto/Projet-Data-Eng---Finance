@@ -1,0 +1,34 @@
+# Mon environnement virtuel
+.venv/
+# Fichiers de cache Python
+__pycache__/
+*.pyc
+# Fichiers de configuration de l'IDE
+.vscode/
+.idea/
+# Fichiers de logs
+*.log
+# Fichiers de données temporaires
+*.tmp
+# Fichiers de test
+tests/
+# Fichiers de documentation générés
+docs/
+# Fichiers de configuration sensibles
+config.yaml
+# Fichiers de déploiement
+deploy/
+# Fichiers de build
+build/
+dist/
+# Fichiers de distribution
+*.egg-info/
+# Fichiers de cache de pip
+pip-log.txt
+pip-delete-this-directory.txt
+# Fichiers de configuration de l'environnement
+.env
+# Fichiers de configuration de l'environnement de développement
+.env.local
+.env.development
+.env.test

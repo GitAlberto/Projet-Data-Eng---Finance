@@ -1,0 +1,12 @@
+# Analyse
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+
+# Data Collection
+requests
+yfinance
+sqlalchemy 
+psycopg2-binary
