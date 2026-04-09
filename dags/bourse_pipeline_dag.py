@@ -8,7 +8,7 @@ from scripts.chargement import load_data
 
 # 1. Les paramètres par défaut (en cas d'erreur, qui prévenir, etc.)
 default_args = {
-    'owner': 'data_engineer', # Qui est responsable de ce DAG (pour les notifications)
+    'owner': 'Alberto_data_engineer', # Qui est responsable de ce DAG (pour les notifications)
     'depends_on_past': False,  # Ce DAG peut-il s'exécuter si la précédente exécution a échoué ? Non, on veut que chaque jour soit indépendant
     'start_date': datetime(2026, 4, 1), # À partir de quand le robot commence à compter
     'retries': 1, # Si ça plante, il réessaie 1 fois
@@ -17,7 +17,7 @@ default_args = {
 
 # 2. La fonction "Wrapper" (qui emballe ton code pour Airflow)
 def executer_pipeline_complet():
-    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA'] # Mes entreprises cibles (Carrefour, AXA, Orange sur Euronext Paris)
+    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA', 'BNP.PA','TTE.PA','^FCHI'] # Mes entreprises cibles (Carrefour, AXA, Orange, CAC40, TotalEnergies,BNP sur Euronext Paris)
     
     print(" !! Démarrage de l'extraction...")
     raw_data = extract_financial_data(entreprises_cibles)
@@ -35,7 +35,7 @@ with DAG(
     dag_id='pipeline_bourse_journalier', # Nom unique du DAG
     default_args=default_args, # Paramètres par défaut
     description='Extrait et stocke les cours de la bourse tous les matins', # Description pour les autres data engineers
-    schedule_interval='13 52 * * 1-5', # Expression Cron : À 08h00, du Lundi (1) au Vendredi (5)
+    schedule_interval='0 8 * * 1-5', # Expression Cron : À 08h00, du Lundi (1) au Vendredi (5)
     catchup=False, # Ne pas rattraper les exécutions manquées (si le DAG était arrêté pendant un moment, il ne va pas essayer de faire tout le backlog)
     tags=['finance'] # Tags pour organiser les DAGs dans l'interface d'Airflow
 ) as dag:
