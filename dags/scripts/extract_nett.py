@@ -40,21 +40,30 @@ def clean_data(raw_df, tickers):
     final_df.rename(columns={
         'Date': 'date_cloture',
         'Close': 'prix_cloture_eur',
-        'Volume': 'volume_echanges'
+        'Volume': 'volume_echanges',
+        'Open': 'prix_ouverture_eur',
+        'High': 'prix_plus_haut_eur',
+        'Low': 'prix_plus_bas_eur'
     }, inplace=True ) # Inplace = True : Pour que les changements soient appliqués directement sur le DataFrame
     
     # On ne garde que les colonnes qui vont intéresser le métier
-    final_df = final_df[['date_cloture', 'Entreprise', 'prix_cloture_eur', 'volume_echanges']]
+    final_df = final_df[['date_cloture', 'Entreprise', 'prix_cloture_eur', 'volume_echanges', 'prix_ouverture_eur', 'prix_plus_haut_eur', 'prix_plus_bas_eur']]
     
     # Arrondir les prix à 2 décimales pour la propreté
     final_df['prix_cloture_eur'] = final_df['prix_cloture_eur'].round(2)
+    final_df['prix_ouverture_eur'] = final_df['prix_ouverture_eur'].round(2)
+    final_df['prix_plus_haut_eur'] = final_df['prix_plus_haut_eur'].round(2)
+    final_df['prix_plus_bas_eur'] = final_df['prix_plus_bas_eur'].round(2)
+
+    # On renomme le CAC40 en CAC40_eur
+    final_df['Entreprise'] = final_df['Entreprise'].replace('^FCHI', 'CAC40_eur')
     
     return final_df
 
 if __name__ == "__main__":
-    # Nos cibles métiers : Carrefour (CA.PA), AXA (CS.PA), Orange (ORA.PA)
+    # Nos cibles métiers : Carrefour (CA.PA), AXA (CS.PA), Orange (ORA.PA), BNP (BNP.PA), TotalEnergies (TTE.PA)
     # Le ".PA" signifie qu'on regarde sur le marché de Paris (Euronext)
-    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA']
+    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA', 'BNP.PA','TTE.PA','^FCHI']
     
     # Étape 1 : Extraction des données financières de la veille dans un format brut (avec toutes les colonnes que yfinance fournit)
     raw_data = extract_financial_data(entreprises_cibles)

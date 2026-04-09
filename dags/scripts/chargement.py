@@ -25,7 +25,7 @@ def load_data(df):
 # --- Dans le bloc if __name__ == "__main__", ajoute l'appel à la fonction : ---
 
 if __name__ == "__main__":
-    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA']
+    entreprises_cibles = ['CA.PA', 'CS.PA', 'ORA.PA', 'BNP.PA','TTE.PA','^FCHI'] # Mes entreprises cibles (Carrefour, AXA, Orange sur Euronext Paris)
     
     # 1. Extract
     raw_data = extract_financial_data(entreprises_cibles)

@@ -48,7 +48,7 @@ services:
       - postgres
       - airflow-init
 
-  # 4. Le planificateur (Celui qui lancera tes scripts Python automatiquement)
+  # 4. Le planificateur celui ci lancera tes scripts Python automatiquement
   airflow-scheduler:
     <<: *airflow-common
     command: scheduler
